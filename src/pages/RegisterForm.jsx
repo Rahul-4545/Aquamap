@@ -17,7 +17,7 @@ const RegisterForm = () => {
                     <FaLock  className='icon'/>
                      </div>
                 <div className="remember-forgot">
-                  <label><input type="checkbox"/>I agree to the terms and conditions</label>  
+                  <label><input type="checkbox"/>I agree  the terms and conditions</label>  
     
                 </div>
                 <button type='submit'>Register</button>
