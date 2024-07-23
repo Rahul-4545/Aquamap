@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import '../style/ReportProblems.css'
-const ReportProblems = () => {
+import '../style/Profile.css';
+
+
+const Profile = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    locality: '',
-    problemType: '',
-    description: '', 
+    fullName: '',
+    email: '',
+    mobileNumber: '',
+    preferredLanguage: '',
+    aboutMe: '',
   });
 
   const handleChange = (e) => {
@@ -19,32 +21,22 @@ const ReportProblems = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    console.log('Form data:', formData);
+  
+    console.log('Profile data:', formData);
   };
 
   return (
-    <div>
-      <h1>Report a problem</h1>
-
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d58731648.23368149!2d84.524642!3d26.043523!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1721490856047!5m2!1sen!2sin"
-        width={600}
-        height={450}
-        style={{ border: 0 }}
-        allowFullScreen=""
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
+    <div className="profile-container">
+      <h1>Profile Form</h1>
 
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            Name:
+            Full Name:
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
               required
             />
@@ -52,11 +44,23 @@ const ReportProblems = () => {
         </div>
         <div>
           <label>
-            Phone Number:
+            Email Address:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Mobile Number:
             <input
               type="tel"
-              name="phone"
-              value={formData.phone}
+              name="mobileNumber"
+              value={formData.mobileNumber}
               onChange={handleChange}
               required
             />
@@ -64,34 +68,28 @@ const ReportProblems = () => {
         </div>
         <div>
           <label>
-            Locality:
-            <input
-              type="text"
-              name="locality"
-              value={formData.locality}
+            Preferred Language:
+            <select
+              name="preferredLanguage"
+              value={formData.preferredLanguage}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Select a language</option>
+              <option value="english">English</option>
+              <option value="spanish">Spanish</option>
+              <option value="french">French</option>
+              <option value="german">German</option>
+              <option value="chinese">Chinese</option>
+            </select>
           </label>
         </div>
         <div>
           <label>
-            Type of Problem:
-            <input
-              type="text"
-              name="problemType"
-              value={formData.problemType}
-              onChange={handleChange}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Description of the Problem:
+            About Me:
             <textarea
-              name="description"
-              value={formData.description}
+              name="aboutMe"
+              value={formData.aboutMe}
               onChange={handleChange}
               required
             />
@@ -105,4 +103,4 @@ const ReportProblems = () => {
   );
 };
 
-export default ReportProblems;
+export default Profile;

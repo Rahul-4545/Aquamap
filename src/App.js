@@ -5,6 +5,8 @@ import RegisterForm from './pages/RegisterForm';
 import ReportProblems from './pages/ReportProblems';
 import Feedback from './pages/Feedback';
 import ShareIdeas from './pages/ShareIdeas';
+import Profile from './pages/Profile';
+
 
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
             element={<RegisterForm/>}
           />
           <Route
-          path='Map'
+          path='dummy'
           element={<ReportProblems/>}
           />
           <Route
@@ -33,6 +35,12 @@ function App() {
           path='shareideas'
           element={<ShareIdeas/>}
           />
+          <Route
+          path='profile'
+          element={<Profile/>}
+          />
+          
+         
 
         </Routes>
     </BrowserRouter>
