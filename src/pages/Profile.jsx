@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../style/Profile.css';
 
-
 const Profile = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -9,20 +8,29 @@ const Profile = () => {
     mobileNumber: '',
     preferredLanguage: '',
     aboutMe: '',
+    profilePhoto: null,  // Added state for profile photo
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: files[0],  // Store the selected file
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
   
     console.log('Profile data:', formData);
+    // Handle form submission logic here, e.g., uploading the profile photo
   };
 
   return (
@@ -77,8 +85,8 @@ const Profile = () => {
             >
               <option value="">Select a language</option>
               <option value="english">English</option>
-              <option value="spanish">Spanish</option>
-              <option value="french">French</option>
+              <option value="tamil">Tamil</option>
+              <option value="telugu">Telugu</option>
               <option value="german">German</option>
               <option value="chinese">Chinese</option>
             </select>
@@ -92,6 +100,17 @@ const Profile = () => {
               value={formData.aboutMe}
               onChange={handleChange}
               required
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Profile Photo:
+            <input
+              type="file"
+              name="profilePhoto"
+              accept="image/*" // Only accept image files
+              onChange={handleChange}
             />
           </label>
         </div>

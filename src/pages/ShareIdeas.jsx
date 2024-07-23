@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../style/ShareIdeas.css'
+import '../style/Shareideas.css'; 
 
-const ShareIdeas = () => {
+const Shareideas = () => {
   const [idea, setIdea] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
@@ -9,7 +9,7 @@ const ShareIdeas = () => {
     e.preventDefault();
     
     console.log(`Submitted Idea: ${idea}`);
-    setIdea('');  // Clear the form
+    setIdea(''); // Clear the form
     setSubmitted(true); 
   };
 
@@ -46,4 +46,4 @@ const ShareIdeas = () => {
   );
 };
 
-export default ShareIdeas;
+export default Shareideas;

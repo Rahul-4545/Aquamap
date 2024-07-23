@@ -4,8 +4,9 @@ import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
 import ReportProblems from './pages/ReportProblems';
 import Feedback from './pages/Feedback';
-import ShareIdeas from './pages/ShareIdeas';
+import Shareideas from './pages/Shareideas';
 import Profile from './pages/Profile';
+import Home from './pages/Home'
 
 
 
@@ -13,9 +14,14 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
+          
 
-          <Route
+        <Route
              path=''
+             element={<Home/>}
+          />
+          <Route
+             path='loginform'
              element={<LoginForm/>}
           />
 
@@ -33,11 +39,16 @@ function App() {
           />
           <Route
           path='shareideas'
-          element={<ShareIdeas/>}
+          element={<Shareideas/>}
           />
           <Route
           path='profile'
           element={<Profile/>}
+          />
+
+          <Route
+          path='Home'
+          element={<Home/>}
           />
           
          
