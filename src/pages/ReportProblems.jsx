@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import '../style/ReportProblems.css'
+import { useNavigate } from 'react-router-dom';
+import '../style/ReportProblems.css';
+
 const ReportProblems = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,6 +10,9 @@ const ReportProblems = () => {
     problemType: '',
     description: '', 
   });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +26,11 @@ const ReportProblems = () => {
     e.preventDefault();
     
     console.log('Form data:', formData);
+    setIsSubmitted(true);
+    // Navigate to the Feedback form after a delay to show the message
+    setTimeout(() => {
+      navigate('/feedb');
+    }, 2000); // 2-second delay for demonstration
   };
 
   return (
@@ -98,9 +108,17 @@ const ReportProblems = () => {
           </label>
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">
+            {isSubmitted ? 'Submitted!' : 'Submit'}
+          </button>
         </div>
       </form>
+
+      {isSubmitted && (
+        <div className="confirmation-message">
+          Your problem report has been submitted successfully.
+        </div>
+      )}
     </div>
   );
 };

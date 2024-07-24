@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
-import '../style/Feedback.css'
-
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import '../style/Feedback.css';
 
 const Feedback = () => {
   const [rating, setRating] = useState(1);
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
+    
     console.log(`Rating: ${rating}, Feedback: ${feedback}`);
     setSubmitted(true);
+
+    // Navigate to the Shareideas form after a brief delay to show the message
+    setTimeout(() => {
+      navigate('/shareideas');
+    }, 2000); // 2-second delay for demonstration
   };
 
   const handleRatingChange = (e) => {
@@ -30,6 +36,7 @@ const Feedback = () => {
           <h2>Thank you for your feedback!</h2>
           <p>Your rating: {rating}</p>
           <p>Your feedback: {feedback}</p>
+          <p>Your feedback has been received and is appreciated.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -65,4 +72,4 @@ const Feedback = () => {
   );
 };
 
-export default  Feedback;
+export default Feedback;

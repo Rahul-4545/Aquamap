@@ -24,6 +24,7 @@ const Shareideas = () => {
         <div className="confirmation">
           <h2>Thank you for sharing your idea!</h2>
           <p>We appreciate your contribution and will review it soon.</p>
+          <p>Your idea has been successfully submitted.</p> {/* New message */}
         </div>
       ) : (
         <form onSubmit={handleSubmit}>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/Profile.css';
 
 const Profile = () => {
@@ -8,15 +9,18 @@ const Profile = () => {
     mobileNumber: '',
     preferredLanguage: '',
     aboutMe: '',
-    profilePhoto: null,  // Added state for profile photo
+    profilePhoto: null,
   });
+
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
       setFormData((prevData) => ({
         ...prevData,
-        [name]: files[0],  // Store the selected file
+        [name]: files[0],
       }));
     } else {
       setFormData((prevData) => ({
@@ -28,9 +32,15 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     console.log('Profile data:', formData);
     // Handle form submission logic here, e.g., uploading the profile photo
+
+    // Set the success message
+    setMessage('Profile is updated');
+
+    // Optionally, navigate to the report problems page after showing the message
+    setTimeout(() => navigate('/dummy'), 2000);
   };
 
   return (
@@ -109,7 +119,7 @@ const Profile = () => {
             <input
               type="file"
               name="profilePhoto"
-              accept="image/*" // Only accept image files
+              accept="image/*"
               onChange={handleChange}
             />
           </label>
@@ -118,6 +128,9 @@ const Profile = () => {
           <button type="submit">Submit</button>
         </div>
       </form>
+
+    
+      {message && <div className="success-message">{message}</div>}
     </div>
   );
 };

@@ -6,11 +6,11 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleUserLoginClick = () => {
-    navigate('/loginform'); // Navigate to user login page
+    navigate('/loginform'); 
   };
 
   const handleOrgLoginClick = () => {
-    navigate('/dummy'); // Navigate to organization login page
+    navigate('/dummy'); 
   };
 
   return (
