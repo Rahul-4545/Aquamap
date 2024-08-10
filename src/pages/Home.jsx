@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Home.css';
+import Home1 from '../img/Home.png'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,11 +11,12 @@ const Home = () => {
   };
 
   const handleOrgLoginClick = () => {
-    navigate('/dummy'); 
+    navigate('/dp'); 
   };
 
   return (
     <div className="home-container">
+      <img src={Home1}></img>
       <h1>Welcome to AQUAMAP</h1>
       <div className="home-buttons">
         <button onClick={handleUserLoginClick}>User Login</button>

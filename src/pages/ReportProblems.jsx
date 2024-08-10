@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 import '../style/ReportProblems.css';
 
 const ReportProblems = () => {
@@ -12,7 +13,9 @@ const ReportProblems = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,21 +25,33 @@ const ReportProblems = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log('Form data:', formData);
-    setIsSubmitted(true);
-    // Navigate to the Feedback form after a delay to show the message
-    setTimeout(() => {
-      navigate('/feedb');
-    }, 2000); // 2-second delay for demonstration
+    try {
+      const response = await axios.post('http://localhost:3013/report-problem', formData);
+      if (response.status === 201) {
+        setIsSubmitted(true);
+        setError(null);
+        setTimeout(() => navigate('/shareideas'), 2000); // Navigate to ShareIdeas after submission
+      }
+    } catch (err) {
+      if (err.response) {
+        console.error('Response error:', err.response.data);
+        setError(`Error: ${err.response.data.message || 'Server error'}`);
+      } else if (err.request) {
+        console.error('No response received:', err.request);
+        setError('No response from the server. Please check your connection.');
+      } else {
+        console.error('Error setting up the request:', err.message);
+        setError('There was a problem with the request setup.');
+      }
+    }
   };
 
   return (
     <div>
       <h1>Report a problem</h1>
-
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d58731648.23368149!2d84.524642!3d26.043523!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1721490856047!5m2!1sen!2sin"
         width={600}
@@ -117,6 +132,12 @@ const ReportProblems = () => {
       {isSubmitted && (
         <div className="confirmation-message">
           Your problem report has been submitted successfully.
+        </div>
+      )}
+
+      {error && (
+        <div className="error-message">
+          {error}
         </div>
       )}
     </div>

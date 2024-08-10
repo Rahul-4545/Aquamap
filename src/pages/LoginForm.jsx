@@ -1,50 +1,93 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../style/LoginForm.css';
-import { FaRegUser, FaLock } from "react-icons/fa";
+import '../style/LoginForm.css'; 
 
-const LoginForm = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+const Login = () => {
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Add your login logic here, e.g., validating credentials
-    // For demonstration purposes, we'll assume the login is always successful
-    
-    // If login is successful:
-    setIsLoggedIn(true);
-    setMessage('Login Successful!');
-    // Navigate to the profile page after a delay to show the message
-    setTimeout(() => navigate('/profile'), 2000);
+    setMessage('');
+
+    const apiUrl = 'http://localhost:3013/login';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        setMessage(result.message || 'Failed to login');
+        return;
+      }
+
+      localStorage.setItem('user', JSON.stringify(result.user));
+
+      // Redirect to report problems page
+      navigate('/dummy');
+    } catch (error) {
+      console.error('Error:', error);
+      setMessage('An error occurred while logging in');
+    }
+  };
+
+  const handleRegisterRedirect = () => {
+    navigate('/signup');
   };
 
   return (
-    <div className='form-box login'>
+    <div className="login-container">
+      <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
-        <h1>LoginForm</h1>
-        <div className="input-box">
-          <input type="text" placeholder='Username' required />
-          <FaRegUser className='icon' />
+        <div>
+          <label>
+            Username:
+            <input
+              type="text"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
-        <div className="input-box">
-          <input type="password" placeholder='Password' required />
-          <FaLock className='icon' />
+        <div>
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+            />
+          </label>
         </div>
-        <div className="remember-forgot">
-          <label><input type="checkbox" />Remember me</label>
-          <a href="#">Forgot password?</a>
-        </div>
-        <button type='submit'>Login</button>
-        <div className="register-link">
-          <p>Don't have an account? <a href='signup'>Register</a></p>
+        <div>
+          <button type="submit">Login</button>
         </div>
       </form>
-      {isLoggedIn && <div className="success-message">{message}</div>}
+      {message && <div className="error-message">{message}</div>}
+      <div>
+        <p>Don't have an account?</p>
+        <button onClick={handleRegisterRedirect}>Register Here</button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm;
+export default Login;

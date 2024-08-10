@@ -1,0 +1,54 @@
+/* Ideas.css */
+
+.ideas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+  
+  li p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  li p strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .error {
+    color: red;
+  }
+  

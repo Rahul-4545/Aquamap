@@ -3,10 +3,16 @@ import './App.css';
 import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
 import ReportProblems from './pages/ReportProblems';
-import Feedback from './pages/Feedback';
+
 import Shareideas from './pages/Shareideas';
 import Profile from './pages/Profile';
+
+
 import Home from './pages/Home'
+
+import DisplayReportProblems from './pages/DisplayReportProblems' 
+
+import DisplayShareIdeas from './pages/DisplayShareIdeas' 
 
 
 
@@ -33,10 +39,7 @@ function App() {
           path='dummy'
           element={<ReportProblems/>}
           />
-          <Route
-          path='feedb'
-          element={<Feedback/>}
-          />
+         
           <Route
           path='shareideas'
           element={<Shareideas/>}
@@ -45,10 +48,18 @@ function App() {
           path='profile'
           element={<Profile/>}
           />
-
+           
           <Route
           path='Home'
           element={<Home/>}
+          />
+          <Route
+          path='dp'
+          element={<DisplayReportProblems/>}
+          />
+          <Route
+          path='di'
+          element={<DisplayShareIdeas/>}
           />
           
          
